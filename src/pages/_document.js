@@ -1,27 +1,27 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import getConfig from 'next/config';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
-        const initialProps = await Document.getInitialProps(ctx)
-        return { ...initialProps }
+        const initialProps = await Document.getInitialProps(ctx);
+        return { ...initialProps };
     }
 
     render() {
+        const contextPath = getConfig().publicRuntimeConfig.contextPath;
+
         return (
-            <Html>
+            <Html lang="en">
                 <Head>
-                    <link
-                        href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap"
-                        rel="stylesheet"
-                    />
+                    <link id="theme-css" href={`${contextPath}/themes/lara-light-indigo/theme.css`} rel="stylesheet"></link>
                 </Head>
-                <body className="antialiased">
+                <body>
                     <Main />
                     <NextScript />
                 </body>
             </Html>
-        )
+        );
     }
 }
 
-export default MyDocument
+export default MyDocument;
